@@ -12,18 +12,11 @@ import {
 } from '@mui/material'
 
 import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
 import { PhotoCamera } from '@mui/icons-material'
 import React from 'react'
-import { makeStyles } from '@mui/material/styles'
+import useStyles from './styles'
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    backgroundColor: theme.palette.background.color,
-    padding: theme.spacing(8, 0, 6),
-  },
-}))
-
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 function App() {
   const classes = useStyles()
   return (
@@ -31,7 +24,7 @@ function App() {
       <CssBaseline />
       <AppBar position='relative'>
         <Toolbar>
-          <PhotoCamera />
+          <PhotoCamera className={classes.icon} />
           <Typography variant='h6'>Photo Album</Typography>
         </Toolbar>
       </AppBar>
@@ -55,7 +48,7 @@ function App() {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem
               obcaecati possimus cum earum totam asperiores?
             </Typography>
-            <div>
+            <div className={classes.button}>
               <Grid container spacing={2} justify='center'>
                 <Grid item>
                   <Button variant='contained' color='primary'>
@@ -71,7 +64,47 @@ function App() {
             </div>
           </Container>
         </div>
+        <Container className={classes.cardGrid} maxWidth='md'>
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image='https://source.unsplash.com/random'
+                    title='Image Title'
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant='h5'>
+                      Heading
+                    </Typography>
+                    <Typography>
+                      This is a media card, you can use this to describe the
+                      content
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size='small' color='primary'>
+                      View
+                    </Button>
+                    <Button size='small' color='primary'>
+                      Edit
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </main>
+      <footer className={classes.footer}>
+        <Typography variant='h6' align='center' gutterBottom>
+          Footer
+        </Typography>
+        <Typography variant='subtitle1' align='center' color='textSecondary'>
+          MeryAmun World {new Date().getFullYear()} &copy;
+        </Typography>
+      </footer>
     </>
   )
 }
